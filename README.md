@@ -9,6 +9,7 @@ SPI IP project UVM verification description
   - [Git configuration](#git-configuration)
   - [Generate an SSH key](#generate-an-ssh-key)
   - [Repository download](#repository-download)
+  - [Git flow](#git-flow)
   - [Weekly meetings](#weekly-meetings)
   - [Discord channel](#discord-channel)
   - [Toolchain](#toolchain)
@@ -78,6 +79,54 @@ git clone git@github.com:uvm-collab/spi_ip.git
 ```
 
 When prompted for authentication, enter the chosen SSH key passphrase to complete the download.
+
+## Git flow
+
+Use Git [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+1. Create branch
+
+```bash
+git switch -c feat/uvc-monitor-logic
+# ot
+git branch feat/uvc-monitor-logic && git switch feat/uvc-monitor-logic
+```
+2. Work, add, commit (small commits, Conventional Commits)
+
+```bash
+git add monitor.sv
+git commit -m "feat: add monitor logic"
+```
+
+3. Push your branch to GitHub
+
+```bash
+git push -u origin feat/uvm-monitor-logic
+```
+
+4. Open **Pull Request** in GitHub.
+
+   - Use a clear Conventional Commit PR tittle
+   - Push more commits as needed
+
+5. Merge **Pull Request**
+
+    - Use yout team's choice (Merge commits/Squash)
+    - Click **Delete branch** in GitHub
+
+6. Clean up locally and prune stale remotes
+
+```bash
+git switch main
+git fetch --prune origin
+git branch -D feat/uvm-monitor-logic
+```
+
+7. Sync your local `main` branch (fast-forward only)
+
+```bash
+git pull --ff-only origin main
+```
 
 ## Weekly meetings
 
