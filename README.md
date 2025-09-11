@@ -8,11 +8,15 @@ SPI IP project UVM verification description
   - [Contents](#contents)
   - [Git configuration](#git-configuration)
   - [Generate an SSH key](#generate-an-ssh-key)
+  - [Add the SSH key to GitHub](#add-the-ssh-key-to-github)
+  - [Configure SSH for GitHub](#configure-ssh-for-github)
   - [Repository download](#repository-download)
   - [Git flow](#git-flow)
+  - [Bring changes from `main` into a feature branch](#bring-changes-from-main-into-a-feature-branch)
   - [Weekly meetings](#weekly-meetings)
-  - [Discord channel](#discord-channel)
+    - [Indico](#indico)
   - [Toolchain](#toolchain)
+    - [Vivado](#vivado)
   - [Contacts](#contacts)
 
 ## Git configuration
@@ -38,28 +42,44 @@ git config --list
 
 ## Generate an SSH key
 
-You can interact with GitHub either with **HTTPS** or **SSH**. The **recommended** protocol is SSH.
-It uses a pair of **private/public keys** without the need of password authentication. To use SSH you have
-first to [generate a SSH key pair](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) with:
+You can interact with GitHub using either **HTTPS** or **SSH**. The **recommended** protocol is SSH,
+because it uses a pair of **private/public keys** and does not require password authentication.
+
+To use SSH you first need to [generate a new SSH key pair](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key) with:
 
 ```bash
 cd ~/.ssh
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
-use a meaningful name like `id_ed25519_github` and enter your passphrase.
+- If the `~/.ssh` directory doesn't already exist, create it with:
 
-The second step is to add your SSH **public key** to the [list of your SSH keys](https://github.com/settings/keys)
-on your GitHub account. To do this simply `cat` your new key:
+  ```bash
+  mkdir ~/.ssh
+  ```
+
+- When prompted for the file name, use a meaningful name such as `id_ed25519_github`.
+- Enter a passphrase when asked (recommended for security).
+
+## Add the SSH key to GitHub
+
+Next, add your SSH **public key** to your GitHub account.
+
+Display the public key with:
 
 ```bash
 cat id_ed25519_github.pub
 ```
 
-Then left-click on you GitHub profile picture, navigate thought **Settings > SSH and GPG keys > New SSH Key**.
-Create a new key and copy and paste the public key.
+Then:
 
-Finally create a file, if it doesn't already, called `~/.ssh/config` inside configure it as follows:
+- Click you GitHub profile picture.
+- Navigate to **Settings > SSH and GPG keys > New SSH Key**. See your [SSH keys](https://github.com/settings/keys).
+- Create a new key entry and paste the public key content.
+
+## Configure SSH for GitHub
+
+Finally create (or edit) the `~/.ssh/config` file to tell SSH which key to use for GitHub:
 
 ```bash
 # GitHub account
@@ -91,6 +111,7 @@ git switch -c feat/uvc-monitor-logic
 # ot
 git branch feat/uvc-monitor-logic && git switch feat/uvc-monitor-logic
 ```
+
 2. Work, add, commit (small commits, Conventional Commits)
 
 ```bash
@@ -128,11 +149,25 @@ git branch -D feat/uvm-monitor-logic
 git pull --ff-only origin main
 ```
 
+## Bring changes from `main` into a feature branch
+
+When working on a feature branch, you often need to update it with the latest changes from `main`.
+The recommended approach is:
+
+```bash
+git switch feat/branch
+git fetch origin main
+git merge origin/main
+# resolve conflicts if any, then commit
+```
+
 ## Weekly meetings
 
-## Discord channel
+### Indico
 
 ## Toolchain
+
+### Vivado
 
 ## Contacts
 
@@ -140,6 +175,6 @@ git pull --ff-only origin main
 
 | Person                        | Email                         | Institute |
 | ----------------------------- | ----------------------------- | --------- |
-| Ciro Fabian Bermudez Marquez  | cirofabian.bermudez@gmail.com | INFN Bari |
-| Luis Enrique Namigtle Jimenez | namigtle066@gmail.com         | INAOE     |
-| Miguel Angel Aleman Arce      | alemanmig@gmail.com           | CIC IPN   |
+| Ciro Fabian Bermudez Marquez  | <cirofabian.bermudez@gmail.com> | INFN Bari |
+| Luis Enrique Namigtle Jimenez | <namigtle066@gmail.com>         | INAOE     |
+| Miguel Angel Aleman Arce      | <alemanmig@gmail.com>           | CIC IPN   |
