@@ -2,7 +2,7 @@
 
 ##=============================================================================
 ## [Filename]       filter.py
-## [Project]        
+## [Project]        spi_ip
 ## [Author]         Ciro Bermudez - cirofabian.bermudez@gmail.com
 ## [Language]       Python 3.10.12
 ## [Created]        Sep 2025
