@@ -1,0 +1,54 @@
+##=============================================================================
+## [Filename]       Makefile.vivado
+## [Project]        spi_uvc
+## [Author]         Luis Namigtle - namigtle066@gmail.com
+## [Language]       GNU Makefile
+## [Created]        Sep 2025
+## [Modified]       -
+## [Description]    spi_uvc Makefile for testing the UVC
+## [Notes]          -
+## [Status]         devel
+## [Revisions]      -
+##=============================================================================
+
+# ===============================  VARIABLES  =================================
+
+# Miscellaneous variables
+CUR_DATE   := $(shell date +%Y-%m-%d_%H-%M-%S)
+
+# Colors
+C_RED := \033[31m
+C_GRE := \033[32m
+C_BLU := \033[34m
+C_YEL := \033[33m
+C_ORA := \033[38;5;214m
+NC    := \033[0m 
+
+# ================================  TARGETS  ==================================
+.DEFAULT_GOAL := all
+SHELL         := bash
+
+.PHONY: all
+all: help
+#______________________________________________________________________________
+
+.PHONY: help
+help: ## Displays help message
+	@echo ""
+	@echo "======================================================================"
+	@echo ""
+	@echo "Usage: make <target> <variables>"
+	@echo ""
+	@echo "--------------------------- Targets ----------------------------------"
+	@grep -h -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@echo ""
+	@echo "--------------------------- Variables -------------------------------"
+	@echo "  TEST              : Name of UVM_TEST"
+	@echo "  VERBOSITY         : UVM_VERBOSITY of the simulation"
+	@echo "  SEED              : Random seed used, must be an integer > 0"
+	@echo ""
+	@echo "-------------------------- Variable Values --------------------------"
+	@echo "  TEST              : $(TEST)"
+	@echo "  VERBOSITY         : $(VERBOSITY)"
+	@echo "  SEED              : $(SEED)"
+	@echo ""
