@@ -163,18 +163,32 @@ git merge origin/main
 
 ## Weekly meetings
 
+[Zoom link](https://cern.zoom.us/j/65700168865?pwd=9QOp3oZxutaNAaiJuaPSUa6tDaOdw3.1)
+
 ### Indico
+
+[indico.global - UVM Verification Collaboration](https://indico.global/category/1375/)
 
 ## Toolchain
 
 ### Vivado
 
+- [Installing Vivado](docs/vivado_install.md)
+- [Setting Up Environment](docs/setup_env.md)
+
+### Manuals
+
+1. [(UG900) Vivado Design Suite User Guide - Logic Simulation](https://docs.amd.com/viewer/book-attachment/U8cK6J65oySTywrNQQKQKw/etODWMMLPls2y3sy8nmaMg-U8cK6J65oySTywrNQQKQKw)
+2. [(UG937) Vivado Design Suite Tutorial - Logic Simulation](https://docs.amd.com/viewer/book-attachment/AQgD74oGsbut9Xk6PJxfeg/ru_jonSSGpL1ZaPwb3D3cA-AQgD74oGsbut9Xk6PJxfeg)
+3. [(UG906) Vivado Design Suite User Guide - Design Analysis and Closure Techniques](https://docs.amd.com/viewer/book-attachment/HKXDYGChb9XYiCDCLp4tqA/1UwxVI3GMJjdVgdG3TrZBQ-HKXDYGChb9XYiCDCLp4tqA)
+
+> [!IMPORTANT]  
+> All manuals are from the year 2025
+
 ## Contacts
 
-[**[Contents]**](#contents)
-
-| Person                        | Email                         | Institute |
-| ----------------------------- | ----------------------------- | --------- |
+| Person                        | Email                           | Institute |
+| ----------------------------- | ------------------------------- | --------- |
 | Ciro Fabian Bermudez Marquez  | <cirofabian.bermudez@gmail.com> | INFN Bari |
 | Luis Enrique Namigtle Jimenez | <namigtle066@gmail.com>         | INAOE     |
 | Miguel Angel Aleman Arce      | <alemanmig@gmail.com>           | CIC IPN   |
