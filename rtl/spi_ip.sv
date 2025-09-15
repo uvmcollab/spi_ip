@@ -1,9 +1,9 @@
 //==================================================================================
 // [Filename]       spi_ip.sv
 // [Project]        spi_ip
-// [Author]         Ciro Bermudez
+// [Author]         Ciro Bermudez - cirofabian.bermudez@gmail.com
 // [Language]       SystemVerilog 2017 [IEEE Std. 1800-2017]
-// [Created]        2025-05-13
+// [Created]        2025-09-12
 // [Modified]       -
 // [Description]    -
 // [Notes]          -
@@ -26,7 +26,7 @@ module spi_ip (
     output logic        mosi_o
 );
 
-  //fsm state type
+  // FSM state type
   typedef enum {
     idle,
     cpha_delay,
@@ -34,7 +34,7 @@ module spi_ip (
     p1
   } state_type;
 
-  //declaration
+  // Signals
   state_type state_reg, state_next;
   logic p_clk;
   logic [15:0] c_reg, c_next;
@@ -118,11 +118,11 @@ module spi_ip (
   assign ready_o = ready_i;
   assign spi_done_tick_o = spi_done_tick_i;
 
-  //lookahead output decoding
+  // Lookahead output decoding
   assign p_clk = (state_next == p1 && ~cpha_i) || (state_next == p0 && cpha_i);
   assign spi_clk_next = (cpol_i) ? ~p_clk : p_clk;
 
-  //output
+  // Output logic
   assign dout_o = si_reg;
   assign mosi_o = so_reg[7];
   assign sclk_o = spi_clk_reg;
