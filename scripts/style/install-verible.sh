@@ -30,7 +30,7 @@ NC="\033[0m"
 
 # ============================= DEPENDENCY CHECK ==============================
 
-printf "${C_ORA}[INFO]: Checking dependencies ...\n${NC}"
+printf "${C_ORA}[INFO]: Checking dependencies\n${NC}"
 DEPENDENCIES=("tar" "wget")
 for item in "${DEPENDENCIES[@]}"; do
   if command -v "${item}" &> /dev/null; then
@@ -45,7 +45,7 @@ printf "  > All dependencies found\n"
 # =========================== VERIBLE INSTALLATION ============================
 
 if [[ $(uname -p) == "x86_64" ]]; then
-    printf "${C_ORA}[INFO]: Installing Verible ...\n${NC}"
+    printf "${C_ORA}[INFO]: Installing Verible\n${NC}"
     printf "  > Installation directory: ${INSTALL_DIR}\n"
     # read -p "Do you want to delete old installation? (y/n): " answer
     # if [[ "${answer}" == [Yy]* ]]; then
