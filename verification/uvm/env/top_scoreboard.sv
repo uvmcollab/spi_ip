@@ -40,23 +40,6 @@ endfunction : write_spi
 
 task top_scoreboard::run_phase(uvm_phase phase);
 
-
-  // string s;
-  // 
-  // forever begin
-  //   
-  // 
-  //       foreach (m_spi_queue[i]) begin
-  // 
-  //         s = {s, $sformatf("\nTRANS[%3d]: \n ------ SCOREBOARD (spi UVC) ------  ", i) ,m_spi_queue[i].convert2string(), "\n"};
-  //     end
-  //       `uvm_info(get_type_name(), s, UVM_DEBUG)
-  //       s="";
-  // 
-  //   m_spi_queue.delete();
-  // 
-  // end
-
 endtask : run_phase
 
 
@@ -66,10 +49,10 @@ endtask : run_phase
 function void top_scoreboard::report_phase(uvm_phase phase);
 
   //string s;
-  //    foreach (m_spi_queue[i]) begin
-  //      s = {s, $sformatf("\nTRANS[%3d]: \n", i+1) ,m_spi_queue[i].convert2string(), "\n"};
-  //    end
-  //    `uvm_info(get_type_name(), s, UVM_DEBU
+ //    foreach (m_spi_queue[i]) begin
+ //      s = {s, $sformatf("\nTRANS[%3d]: \n", i+1) ,m_spi_queue[i].convert2string(), "\n"};
+ //    end
+ //    `uvm_info(get_type_name(), s, UVM_DEBU
 
   `uvm_info(get_type_name(), $sformatf("PASSED = %3d, FAILED = %3d", m_num_passed, m_num_failed),
             UVM_DEBUG)

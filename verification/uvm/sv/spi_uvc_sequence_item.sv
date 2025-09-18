@@ -7,22 +7,22 @@ class spi_uvc_sequence_item extends uvm_sequence_item;
 
   // Transaction variables
 
-  rand logic rst_i;
-  rand logic [7:0] din_i;
-  rand logic [15:0] dvsr_i;
-  rand logic start_i;
-  rand logic cpol_i;
-  rand logic cpha_i;
-  rand logic miso_i;
+ rand logic rst_i;
+rand logic [7:0] din_i;
+rand logic [15:0] dvsr_i;
+rand logic start_i;
+rand logic cpol_i;
+rand logic cpha_i;
+rand logic miso_i;
 
 
   // Readout variables
 
   logic [7:0] dout_o;
-  logic spi_done_tick_o;
-  logic ready_o;
-  logic sclk_o;
-  logic mosi_o;
+ logic spi_done_tick_o;
+ logic ready_o;
+ logic sclk_o;
+ logic mosi_o;
 
 
   extern function new(string name = "");

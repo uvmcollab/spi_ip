@@ -9,7 +9,7 @@ package top_env_pkg;
 
   import spi_uvc_pkg::*;
   `include "top_vsqr.sv"
-  `include "top_coverage.sv"
+    `include "top_coverage.sv"
   `include "top_scoreboard.sv"
   `include "top_env.sv"
 

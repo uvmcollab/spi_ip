@@ -5,7 +5,7 @@ class top_test extends uvm_test;
   `uvm_component_utils(top_test)
 
   top_env m_env;
-  top_test_vseq vseq;
+ top_test_vseq  vseq;
 
   extern function new(string name, uvm_component parent);
   extern function void build_phase(uvm_phase phase);
@@ -20,7 +20,7 @@ function top_test::new(string name, uvm_component parent);
 endfunction : new
 
 function void top_test::build_phase(uvm_phase phase);
-  m_env = top_env::type_id::create("m_env", this);
+m_env = top_env::type_id ::create("m_env",this);
 endfunction : build_phase
 
 function void top_test::end_of_elaboration_phase(uvm_phase phase);
@@ -31,9 +31,9 @@ endfunction : end_of_elaboration_phase
 task top_test::run_phase(uvm_phase phase);
 
   phase.raise_objection(this);
-  //`uvm_info(get_name(), "Hola Nami", UVM_MEDIUM);
-  vseq = top_test_vseq::type_id::create("vseq");
-  vseq.start(m_env.vsqr);
+    //`uvm_info(get_name(), "Hola Nami", UVM_MEDIUM);
+    vseq = top_test_vseq::type_id::create("vseq");
+    vseq.start(m_env.vsqr);
   phase.drop_objection(this);
 
 endtask : run_phase

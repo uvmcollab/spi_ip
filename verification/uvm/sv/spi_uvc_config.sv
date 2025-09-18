@@ -5,7 +5,7 @@ class spi_uvc_config extends uvm_object;
 
   `uvm_object_utils(spi_uvc_config)
 
-  uvm_active_passive_enum is_active = UVM_ACTIVE;
+  uvm_active_passive_enum is_active   = UVM_ACTIVE;
 
   extern function new(string name = "");
 
@@ -17,4 +17,4 @@ function spi_uvc_config::new(string name = "");
 endfunction : new
 
 
-`endif  // SPI_UVC_CONFIG_SV
+`endif // SPI_UVC_CONFIG_SV
