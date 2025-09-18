@@ -52,6 +52,27 @@ install-verible: ## Install verible
 	@$(STYLE_DIR)/install-verible.sh
 #______________________________________________________________________________
 
+.PHONY: list
+list: ## List all the RTL and TB files
+	@echo -e "$(C_ORA)List of RTL and TB files...$(NC)"
+	@echo -e "$(C_YEL)RTL files:$(NC)"
+	@for file in $(RTL_FILES); do \
+		echo " - $$file"; \
+	done
+	@echo -e "$(C_YEL)Testbench files:$(NC)"
+	@for file in $(TB_FILES); do \
+		echo " - $$file"; \
+	done
+	@echo -e "$(C_YEL)Checking fmt_log/ directory$(NC)"
+	@if [ -d "$(FMT_DIR)" ]; then \
+		echo " - fmt_log/ directory exists"; \
+	else \
+		echo " - fmt_log/ directory does not exists"; \
+		echo " - fmt_log/ created"; \
+		mkdir -p $(FMT_DIR); \
+	fi
+#______________________________________________________________________________
+
 .PHONY: vars
 vars: ## Print Makefile variables
 	@echo -e "$(C_ORA)Miscellaneous variables$(NC)"
