@@ -9,7 +9,6 @@ This utility provides a `Makefile.fmt`to streamline the installation and use of 
 
 ## Features
 
-
 - **Installation**: Download and install Verible automatically
 - **Linting**: Run coding-style and best-practice checks
 - **Formatting**: Reformat code to follow style guidelines

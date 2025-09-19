@@ -7,7 +7,7 @@
 ## [Modified]       -
 ## [Description]    Makefile to lint and format the RTL and TB code
 ## [Notes]          It automatically creates a backup of the code
-## [Status]         devel
+## [Status]         stable
 ## [Revisions]      -
 ##=============================================================================
 
