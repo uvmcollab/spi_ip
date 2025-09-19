@@ -6,5 +6,8 @@ export UVM_WORK="${GIT_ROOT}/work/uvm"
 mkdir -p "${UVM_WORK}" && cd "${UVM_WORK}"
 
 # Style utility Makefile
-ln -sf "${GIT_ROOT}/scripts/style/Makefile.fmt" Makefile
+ln -sf "${GIT_ROOT}/scripts/style/Makefile.fmt" 
+
+# Filter utility Makefile
+ln -sf "${GIT_ROOT}/scripts/filter/Makefile.filter" 
 ```
