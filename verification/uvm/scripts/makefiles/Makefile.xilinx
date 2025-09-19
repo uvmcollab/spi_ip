@@ -17,7 +17,7 @@ CUR_DATE   := $(shell date +%Y-%m-%d_%H-%M-%S)
 
 # Directories
 GIT_DIR     := $(shell git rev-parse --show-toplevel)
-UVM_DIR     := $(GIT_DIR)/spi/verification/uvm
+UVM_DIR     := $(GIT_DIR)/verification/uvm
 ROOT_DIR    := $(CURDIR)
 RUN_DIR     := $(ROOT_DIR)/sim
 LOGS_DIR    := $(ROOT_DIR)/logs
@@ -59,7 +59,7 @@ endif
 # ==============================  TOOLS SETUP  ================================
 
 # Files
-RTL_FILES = $(RTL_DIR)/spi.sv
+RTL_FILES = $(RTL_DIR)/spi_ip.sv
 SVE = -f $(UVM_DIR)/sve.f
 VERDI_FILE = $(VERDI_DIR)/verdi.tcl
 DPI_FILE = $(DPI_DIR)/external.o
@@ -97,33 +97,7 @@ XSIM_FLAGS = work.tb -wdb $(WDB_DIR)/tb.wdb \
 
 WAVE_FLAGS = work.tb -view $(WDB_DIR)/tb.wdb -gui
 
-VCS_FLAGS = -full64 -sverilog -ntb_opts uvm-1.2 \
-			-lca -debug_access+all -kdb \
-			-timescale=1ps/100fs $(FILES) \
-			-l $(LOGS_DIR)/$(CUR_DATE)_comp.log \
-			-top tb \
-			-j8 \
-			$(VCS_DEFINES) \
-			$(COV_FLAGS) \
-			$(DPI_FILE)
 
-SIMV_FLAGS = +UVM_TESTNAME=$(TEST) +UVM_VERBOSITY=$(VERBOSITY) \
-			-l $(LOGS_DIR)/$(CUR_DATE)_simv.log \
-			+UVM_TR_RECORD +UVM_LOG_RECORD +UVM_NO_RELNOTES \
-			+UVM_VERDI_TRACE=HIER+RAL+TLM \
-			$(SIMV_ARGS) \
-			$(COV_FLAGS) \
-			-ucli -do $(UVM_DIR)/run.tcl \
-			$(RUN_FLAGS)
-
-URG_FLAGS = -dir simv.vdb -format both \
-			-log $(LOGS_DIR)/$(CUR_DATE)_cov.log \
-			-report $(COV_DIR)
-
-# VERDI Configuration (see work/sim/verdi.cmd)
-VERDI_FLAGS = -ssf novas.fsdb -dbdir simv.daidir -nologo -q
-VERDI_PLAY  = -play $(VERDI_FILE)
-VERDI_COV   = -cov -covdir simv.vdb -nologo -q
 
 # Colors
 C_RED := \033[31m
@@ -133,8 +107,6 @@ C_YEL := \033[33m
 C_ORA := \033[38;5;214m
 NC    := \033[0m 
 
-# Synopsys tools
-SYNOPSYS_TOOLS = vivado xvlog xelab xsim
 
 # ================================  TARGETS  ==================================
 .DEFAULT_GOAL := all
@@ -142,25 +114,6 @@ SHELL         := bash
 
 .PHONY: all
 all: help
-#______________________________________________________________________________
-
-.PHONY: tools-check
-tools-check: ## Check for missing tools
-	@echo -e "$(C_ORA)Synopsys tool checking...$(NC)"
-	@for tool in $(SYNOPSYS_TOOLS); do \
-		if ! command -v $$tool >/dev/null 2>&1; then \
-			echo -e "$(C_RED)Error: $(C_BLU)$$tool$(C_RED) is not installed or not in PATH$(NC)"; \
-			exit 1; \
-		else \
-			echo -e "$(C_BLU)$$tool$(NC)\t is INSTALLED$(NC)"; \
-		fi; \
-	done
-	@echo "All Synopsys tools are available"
-#______________________________________________________________________________
-
-.PHONY: version
-vcs-version: ## Display Synopsys VCS version
-	vcs -ID
 #______________________________________________________________________________
 
 .PHONY: vars
@@ -224,31 +177,6 @@ random: ## Runs simv simulation using a random seed
 wave: ## Open vivado waveform
 	@echo -e "$(C_ORA)Openning waveform$(NC)"
 	cd $(RUN_DIR) && xsim $(WAVE_FLAGS)
-#______________________________________________________________________________
-
-.PHONY: verdi-play
-verdi-play: ## Opens Verdi GUI running verdi.tcl file
-	@echo -e "$(C_ORA)Openning Verdi running verdi.cmd$(NC)"
-	cd $(RUN_DIR) && verdi $(VERDI_FLAGS) $(VERDI_PLAY) &
-#______________________________________________________________________________
-
-.PHONY: verdi-cov
-verdi-cov: ## Open coverage report in Verdi
-	@echo -e "$(C_ORA)Creating coverage report$(NC)"
-	cd $(RUN_DIR) && verdi $(VERDI_COV) &
-#______________________________________________________________________________
-
-.PHONY: coverage
-coverage: ## Create coverage report
-	@echo -e "$(C_ORA)Creating coverage report$(NC)"
-	@mkdir -p $(COV_DIR)
-	cd $(RUN_DIR) && urg $(URG_FLAGS)
-#______________________________________________________________________________
-
-.PHONY: compile-dpi
-compile-dpi: ## Run dpi (C/C++) compilation
-	@echo -e "$(C_ORA)Compiling dpi (C/C++) code$(NC)"
-	g++ -c $(DPI_DIR)/external.cpp -o $(DPI_DIR)/external.o
 #______________________________________________________________________________
 
 .PHONY: clean

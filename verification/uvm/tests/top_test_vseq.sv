@@ -24,12 +24,9 @@ task top_test_vseq::spi_rand_seq();
   seq = spi_uvc_sequence_base::type_id::create("seq");
 
   if (!(seq.randomize() with {
-        // m_trans no se declara ni se crea en top_test_vseq, porque ya está declarado y 
+        // m_trans no se declara ni se crea en top_test_vseq, porque ya está declarado y
         // creado dentro de tu clase spi_uvc_sequence_base
-
         //el objeto es m_name y accedemos al item
-
-
       }))
     `uvm_fatal("RAND_ERROR", "Randomization error!")
   seq.start(p_sequencer.m_spi_sequencer);

@@ -5,8 +5,6 @@ interface spi_uvc_if (
     input logic clk_i
 );
 
-
-
   logic rst_i;
   logic [7:0] din_i;
   logic [15:0] dvsr_i;
@@ -21,11 +19,8 @@ interface spi_uvc_if (
   logic sclk_o;
   logic mosi_o;
 
-
-
-  //INICIALIZAR VALORES
+  // Initial values
   initial begin
-
     rst_i   = 0;
     din_i   = 0;
     dvsr_i  = 0;
@@ -33,8 +28,6 @@ interface spi_uvc_if (
     cpol_i  = 0;
     cpha_i  = 0;
     miso_i  = 0;
-
-
   end
 
 
@@ -47,22 +40,17 @@ interface spi_uvc_if (
     output cpol_i;
     output cpha_i;
     output miso_i;
-
-
   endclocking : cb_drv
+
 
   clocking cb_mon @(posedge clk_i);
     default input #1ns output #1ns;
-
     input dout_o;
     input spi_done_tick_o;
     input ready_o;
     input sclk_o;
     input mosi_o;
-
-
   endclocking : cb_mon
-
 
 endinterface : spi_uvc_if
 

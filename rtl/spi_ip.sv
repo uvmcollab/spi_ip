@@ -28,14 +28,14 @@ module spi_ip (
 
   // FSM state type
   typedef enum {
-    idle,
-    cpha_delay,
-    p0,
-    p1
-  } state_type;
+    ST_IDLE,
+    ST_CPHA_DELAY,
+    ST_P0,
+    ST_P1
+  } state_t;
 
   // Signals
-  state_type state_reg, state_next;
+  state_t state_reg, state_next;
   logic p_clk;
   logic [15:0] c_reg, c_next;
   logic spi_clk_reg, ready_i, spi_done_tick_i;
@@ -46,7 +46,7 @@ module spi_ip (
 
   always_ff @(posedge clk_i, posedge rst_i)
     if (rst_i) begin
-      state_reg <= idle;
+      state_reg <= ST_IDLE;
       si_reg <= 0;
       so_reg <= 0;
       n_reg <= 0;
@@ -71,47 +71,48 @@ module spi_ip (
     c_next = c_reg;
 
     case (state_reg)
-      idle: begin
+      ST_IDLE: begin
         ready_i = 1;
         if (start_i) begin
           so_next = din_i;
           n_next  = 0;
           c_next  = 0;
-          if (cpha_i) state_next = cpha_delay;
-          else state_next = p0;
+          if (cpha_i) state_next = ST_CPHA_DELAY;
+          else state_next = ST_P0;
         end
       end
 
-      cpha_delay: begin
+      ST_CPHA_DELAY: begin
         if (c_reg == dvsr_i) begin
-          state_next = p0;
+          state_next = ST_P0;
           c_next = 0;
         end else begin
           c_next = c_reg + 1;
         end
       end
 
-      p0: begin
+      ST_P0: begin
         if (c_reg == dvsr_i) begin
-          state_next = p1;
+          state_next = ST_P1;
           si_next = {si_reg[6:0], miso_i};
           c_next = 0;
         end else c_next = c_reg + 1;
       end
 
-      p1: begin
+      ST_P1: begin
         if (c_reg == dvsr_i)
           if (n_reg == 7) begin
             spi_done_tick_i = 1;
-            state_next = idle;
+            state_next = ST_IDLE;
           end else begin
             so_next = {so_reg[6:0], 1'b0};
-            state_next = p0;
+            state_next = ST_P0;
             n_next = n_reg + 1;
             c_next = 0;
           end
         else c_next = c_reg + 1;
       end
+      default: state_next = ST_IDLE;
     endcase
   end
 
@@ -119,7 +120,7 @@ module spi_ip (
   assign spi_done_tick_o = spi_done_tick_i;
 
   // Lookahead output decoding
-  assign p_clk = (state_next == p1 && ~cpha_i) || (state_next == p0 && cpha_i);
+  assign p_clk = (state_next == ST_P1 && ~cpha_i) || (state_next == ST_P0 && cpha_i);
   assign spi_clk_next = (cpol_i) ? ~p_clk : p_clk;
 
   // Output logic
