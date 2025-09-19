@@ -36,14 +36,14 @@ endtask : spi_rand_seq
 task top_test_vseq::body();
 
   // Initial delay
- // #(50ns);
+  // #(50ns);
 
- // repeat (10) begin
- //   spi_rand_seq();
- // end
+  // repeat (10) begin
+  //   spi_rand_seq();
+  // end
 
   // Drain time
- // #(50ns);
+  // #(50ns);
 
 endtask : body
 

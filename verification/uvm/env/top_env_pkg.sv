@@ -6,14 +6,12 @@ package top_env_pkg;
   `include "uvm_macros.svh"
   import uvm_pkg::*;
 
-
   import spi_uvc_pkg::*;
   `include "top_vsqr.sv"
-    `include "top_coverage.sv"
   `include "top_scoreboard.sv"
+  `include "top_coverage.sv"
   `include "top_env.sv"
 
 endpackage : top_env_pkg
-
 
 `endif  // TOP_ENV_PKG_SV
