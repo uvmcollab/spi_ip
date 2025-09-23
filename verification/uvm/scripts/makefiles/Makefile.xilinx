@@ -191,21 +191,10 @@ clean-logs: ## Remove logs
 	rm -rf $(LOGS_DIR)/*
 #______________________________________________________________________________
 
-.PHONY: filter
-filter: ## Filter logs
-	@echo -e "$(C_ORA)Filtering logs$(NC)"
-	@mkdir -p $(LOGS_DIR)/filter
-	@cd $(LOGS_DIR) && grep --color=auto -B 2 -A 3 "DRIVER"     *_simv.log > $(LOGS_DIR)/filter/read.log    || true
-	@cd $(LOGS_DIR) && grep --color=auto -B 2 -A 3 "MONITOR"    *_simv.log > $(LOGS_DIR)/filter/monitor.log || true
-#______________________________________________________________________________
-
 .PHONY: help
 help: ## Displays help message
-	@echo ""
 	@echo "======================================================================"
-	@echo ""
 	@echo "Usage: make <target> <variables>"
-	@echo ""
 	@echo "--------------------------- Targets ----------------------------------"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@echo ""
@@ -226,6 +215,4 @@ help: ## Displays help message
 	@echo "  SIMV_ARGS         : $(SIMV_ARGS)"
 	@echo "  GUI_MODE          : $(GUI_MODE)"
 	@echo "  CODE_COV          : $(CODE_COV)"
-	@echo ""
 	@echo "======================================================================"
-	@echo ""
