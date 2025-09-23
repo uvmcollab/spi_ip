@@ -24,7 +24,7 @@ FILTER_DIR   := $(WORK_DIR)/filter
 LOGS_DIR     := $(WORK_DIR)/logs
 
 # Files
-LOG_INPUT    := $(LOGS_DIR)/*_simv.log
+LOG_INPUT    := $(LOGS_DIR)/simulate.log
 
 # Tools
 FILTER_TOOL  := $(SCRIPTS_DIR)/filter/filter.py
@@ -38,13 +38,20 @@ C_ORA := \033[38;5;214m
 NC    := \033[0m
 
 # ================================  TARGETS  ==================================
+.DEFAULT_GOAL := all
+SHELL         := bash
+
+.PHONY: all
+all: help
+#______________________________________________________________________________
 
 .PHONY: filter
 filter: ## FILTER: Filter logs
 	@echo -e "$(C_ORA)FILTER: Filtering logs$(NC)"
 	@mkdir -p $(FILTER_DIR)
-	$(FILTER_TOOL) -i $(LOG_INPUT) -o $(FILTER_DIR)/spi_uvc_driver.log -s spi_uvc_driver
-	$(FILTER_TOOL) -i $(LOG_INPUT) -o $(FILTER_DIR)/spi_uvc_monitor.log -s spi_uvc_monitor
+# 	$(FILTER_TOOL) -i $(LOG_INPUT) -o $(FILTER_DIR)/spi_uvc_driver.log -s spi_uvc_driver
+# 	$(FILTER_TOOL) -i $(LOG_INPUT) -o $(FILTER_DIR)/spi_uvc_monitor.log -s spi_uvc_monitor
+	$(FILTER_TOOL) -i $(LOG_INPUT) -o $(FILTER_DIR)/top_test_vseq.log -s top_test_vseq
 #______________________________________________________________________________
 
 .PHONY: clean-filter
@@ -53,4 +60,13 @@ clean-filter: ## FILTER: Remove filter logs
 	rm -rf $(FILTER_DIR)
 #______________________________________________________________________________
 
-
+.PHONY: help
+help: ## Displays help message
+	@echo "======================================================================"
+	@echo ""
+	@echo "Usage: make <target>"
+	@echo ""
+	@echo "--------------------------- Targets ----------------------------------"
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@echo ""
+	@echo "======================================================================"
