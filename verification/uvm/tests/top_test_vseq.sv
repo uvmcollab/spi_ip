@@ -35,15 +35,17 @@ endtask : spi_rand_seq
 
 task top_test_vseq::body();
 
+  `uvm_info(get_type_name(), "\nBeginning UVM simulation", UVM_MEDIUM)
   // Initial delay
-  // #(50ns);
+  #(50ns);
 
   // repeat (10) begin
   //   spi_rand_seq();
   // end
 
   // Drain time
-  // #(50ns);
+  #(50ns);
+  `uvm_info(get_type_name(), "\nEnding UVM simulation", UVM_MEDIUM)
 
 endtask : body
 
