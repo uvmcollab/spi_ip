@@ -159,10 +159,10 @@ must be connected to the master even if there is only one slave device; in other
 words, simply tying it to 0 will not work. The SPI standard does not explicitly
 define the role of the **CS** signal or protocol on the transaction. In
 addition, the timing requirement of “setup time” of **CS**,
-$t_{\text{SS\_SETUP}}$, which is the interval between the **CS** assertion and
-clock initiation, “hold time” of **CS**, $t_{\text{SS\_HOLD}}$, which is the
+$t_{\text{SS \_ SETUP}}$, which is the interval between the **CS** assertion and
+clock initiation, “hold time” of **CS**, $t_{\text{SS \_ HOLD}}$, which is the
 interval between the **CS** de-assertion and clock termination, and the
-turn-around time between two transactions, $t_{\text{SS\_TURN}}$, are not
+turn-around time between two transactions, $t_{\text{SS \_ TURN}}$, are not
 specified. 
 
 The second undefined aspect is the number of bits in one data exchange. There
