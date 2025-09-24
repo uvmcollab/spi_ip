@@ -46,8 +46,8 @@ writes data to and read data from to slave simultaneously, which is known as
 *full-duplex* operation.
 
 <p align="center">
-  <img src="images/01-spi_conceptual_diagram.svg" width="75%">
-  <figcaption style="text-align: center;">Figure 1: Conceptual diagram of an SPI bus.</figcaption>
+  <img src="images/01-spi_conceptual_diagram.svg" width="75%"><br>
+  <em>Figure 1: Conceptual diagram of an SPI bus.</em>
 </p>
 
 In addition to the **MOSI**, **MISO**, and **SCLK** lines, a slave device may
@@ -72,8 +72,8 @@ together, the **MISO** line must be driven by a tristate buffer and its output
 should be in a high-impedance state when the slave device is not selected.
 
 <p align="center">
-  <img src="images/02-spi_parallel_configuration.svg" width="60%">
-  <figcaption style="text-align: center;">Figure 2: Parallel configuration</figcaption>
+  <img src="images/02-spi_parallel_configuration.svg" width="60%"><br>
+  <em>Figure 2: Parallel configuration</em>
 </p>
 
 The daisy-chain configuration connects the **MOSI** and **MISO** lines into a
@@ -84,8 +84,8 @@ in this configuration must be "cooperative" and follow the same protocol to
 transmit, insert, and extract data byte.
 
 <p align="center">
-  <img src="images/03-spi_daisy_chain_configuration.svg" width="60%">
-  <figcaption style="text-align: center;">Figure 3: Daisy-chain configuration</figcaption>
+  <img src="images/03-spi_daisy_chain_configuration.svg" width="60%"><br>
+  <em>Figure 3: Daisy-chain configuration</em>
 </p>
 
 ## Basic timing
@@ -110,8 +110,8 @@ the data line. At $t_{4}$, the master raises **SCLK** again and both master and
 slave sample the new data bits.
 
 <p align="center">
-  <img src="images/04-spi_timing_diagram_data.svg" width="60%">
-  <figcaption style="text-align: center;">Figure 4: Representative timing diagram of an SPI data transfer</figcaption>
+  <img src="images/04-spi_timing_diagram_data.svg" width="60%"><br>
+  <em>Figure 4: Representative timing diagram of an SPI data transfer</em>
 </p>
 
 The driving and sampling activities are repeated until eight data bits are
@@ -153,8 +153,8 @@ first edge. Note that in these two modes the clock period and the starting time
 are the same but their values are out of phase.
 
 <p align="center">
-  <img src="images/05-spi_timing_diagram_modes.svg" width="60%">
-  <figcaption style="text-align: center;">Figure 5: SPI modes</figcaption>
+  <img src="images/05-spi_timing_diagram_modes.svg" width="60%"><br>
+  <em>Figure 5: SPI modes</em>
 </p>
 
 The **SCLK** idle value in modes 2 and 3 are 1. The **SCLK** waveform in mode 2
@@ -190,8 +190,8 @@ turn-around time between two transactions, $`t_{\text{SS\_TURN}}`$, are not
 specified.
 
 <p align="center">
-  <img src="images/06-spi_timing_diagram_undefined_aspects.svg" width="60%">
-  <figcaption style="text-align: center;">Figure 6: Timming with CS signal</figcaption>
+  <img src="images/06-spi_timing_diagram_undefined_aspects.svg" width="60%"><br>
+  <em>Figure 6: Timming with CS signal</em>
 </p>
 
 The second undefined aspect is the number of bits in one data exchange. There
