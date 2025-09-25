@@ -1,4 +1,15 @@
-# SPI Specification
+- [1. SPI Specification](#1-spi-specification)
+  - [1.1 Overview](#11-overview)
+  - [1.2 Conceptual architecture](#12-conceptual-architecture)
+  - [1.3 Multiple device configuration](#13-multiple-device-configuration)
+  - [1.4 Basic timing](#14-basic-timing)
+  - [1.5 Operation modes](#15-operation-modes)
+  - [1.6 Undefined aspects](#16-undefined-aspects)
+- [2. SPI IP specification (RTL)](#2-spi-ip-specification-rtl)
+  - [2.1 Module overview](#21-module-overview)
+  - [2.2 Functional Description](#22-functional-description)
+
+# 1. SPI Specification
 
 The SPI (*serial peripheral interface*) standard is a serial data transfer
 protocol originally developed by Motorola. The SPI bus is composed of three
@@ -8,7 +19,7 @@ attaches to the bus. The master generates the clock signal and initiates the
 data transfer. The SPI standard is widely used in embedded systems to connect
 peripheral modules. 
 
-## Overview
+## 1.1 Overview
 
 The SPI standard specifies the protocol to exchange data between two devices via
 serial lines. Instead of using UART's oversampling scheme, the SPI interface
@@ -27,7 +38,7 @@ used to drive any register directly. The system clock rate of the SPI controller
 is much faster than the rate of the SPI clock. From the SPI controller's point
 of view, the SPI clock is just another control signal.
 
-## Conceptual architecture
+## 1.2 Conceptual architecture
 
 The conceptual diagram of an SPI bus with two devices is shown in Figure **1**. 
 Both the master and the slave have a shift register inside. The two
@@ -57,7 +68,7 @@ desired slave device if there are multiple slave devices on the bus. Many SPI
 devices also use **CS** for certain control functionality and it cannot be
 omitted, even in a single-slave configuration.
 
-## Multiple device configuration
+## 1.3 Multiple device configuration
 
 The SPI standard supports a multiple-slave configuration, in which a master
 device can control more than one slave device. There are two basic schemes,
@@ -77,7 +88,7 @@ should be in a high-impedance state when the slave device is not selected.
 </p>
 
 The daisy-chain configuration connects the **MOSI** and **MISO** lines into a
-cascading chain, as shown in Figure **ADD FIGURE**. A single **CS** line is used
+cascading chain, as shown in Figure **3**. A single **CS** line is used
 to control all slave devices. Conceptually, the chain forms a large shift
 register and the data is transferred serially from device to device. The devices
 in this configuration must be "cooperative" and follow the same protocol to
@@ -88,7 +99,7 @@ transmit, insert, and extract data byte.
   <em>Figure 3: Daisy-chain configuration</em>
 </p>
 
-## Basic timing
+## 1.4 Basic timing
 
 The SPI bus uses the *edges* of SPI clock (**SCLK**) to control and synchronize
 the bit data transfer. We can define two activities during a bit transfer:
@@ -120,7 +131,7 @@ $t_{6}$. At $t_{7}$, the master de-asserts **CS**. Note that all samplings are
 performed at the rising edges of **SCLK** and all drivings (with the exception
 of the initial one) are performed at the falling edges of **SCLK**.
 
-## Operation modes
+## 1.5 Operation modes
 
 The SPI’s *operation mode* defines the relationships between the SPI clock edges
 and driving and sampling activities on the data lines. There are four modes. The
@@ -162,7 +173,7 @@ is the exact opposite of that in mode 0 and the waveform in mode 3 is the exact
 opposite of that in mode 1. Again, note that the clock period and the starting
 time are the same for all modes.
 
-## Undefined aspects
+## 1.6 Undefined aspects
 
 The SPI interface was developed by Motorola and has become a *de facto
 standard*. There is no governing body or organization overseeing the standard.
@@ -172,7 +183,7 @@ chip-select signal. A slave device is disabled if its **CS** is not asserted. In
 many devices, the **CS** also functions as a control signal. The data exchange
 is done on a transaction-by-transaction basis:
 
-- The master asserts **CS**.
+- <span style="color:yellow">The master asserts **CS**.</span>
 - The master and the selected slave transfer data bits.
 - The master de-asserts **CS**.
 
@@ -203,9 +214,9 @@ used but not warranted. Because of these undefined aspects, we must consult the
 device’s data sheet and tailor the access for each device. This is commonly done
 by software driver and application.
 
-## SPI IP specification (RTL)
+# 2. SPI IP specification (RTL)
 
-### Module overview
+## 2.1 Module overview
 
 The `spi_ip` module implements a configurable Serial Peripheral Interface (SPI) master. 
 It supports selectable clock polarity (`cpol_i`) and clock phase (`cpha_i`) modes,
@@ -231,7 +242,7 @@ A ready flag allows external logic to coordinate new transactions.
 | `mosi_o`          | Output        | 1         | Master-Out-Slave-In data line, carrying serial data to the SPI slave.                         |
 
 
-### Functional Description
+## 2.2 Functional Description
 
 The spi_ip core operates as an SPI master for full-duplex serial communication. 
 When `start_i` is asserted, the module loads the parallel input `din_i` into a shift 
