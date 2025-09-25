@@ -25,9 +25,7 @@ WDB_DIR     := $(ROOT_DIR)/wdb
 COV_DIR     := $(ROOT_DIR)/coverage
 SCRIPTS_DIR := $(UVM_DIR)/scripts
 TCL_DIR     := $(SCRIPTS_DIR)/vivado
-VERDI_DIR   := $(SCRIPTS_DIR)/verdi
 RTL_DIR     := $(GIT_DIR)/rtl
-DPI_DIR     := $(UVM_DIR)/dpi
 
 # UVM configurations
 TEST ?= top_test
@@ -61,8 +59,6 @@ endif
 # Files
 RTL_FILES = $(RTL_DIR)/spi_ip.sv
 SVE = -f $(UVM_DIR)/sve.f
-VERDI_FILE = $(VERDI_DIR)/verdi.tcl
-DPI_FILE = $(DPI_DIR)/external.o
 
 # UVCs
 UVCS = -f $(UVM_DIR)/spi_uvc.f
@@ -130,9 +126,7 @@ vars: ## Print Makefile variables
 	@echo "LOGS_DIR    = $(LOGS_DIR)"
 	@echo "COV_DIR     = $(COV_DIR)"
 	@echo "SCRIPTS_DIR = $(SCRIPTS_DIR)"
-	@echo "VERDI_DIR   = $(VERDI_DIR)"
 	@echo "RTL_DIR     = $(RTL_DIR)"
-	@echo "DPI_DIR     = $(DPI_DIR)"
 	@echo ""
 	@echo -e "$(C_ORA)UVM variables...$(NC)"
 	@echo "TEST        = $(TEST)"
@@ -182,7 +176,7 @@ wave: ## Open vivado waveform
 .PHONY: clean
 clean: ## Remove all simulation files
 	@echo -e "$(C_ORA)Removing all simulation files$(NC)"
-	rm -rf $(RUN_DIR) $(DPI_DIR)/*.o
+	rm -rf $(RUN_DIR)
 #______________________________________________________________________________
 
 .PHONY: clean
