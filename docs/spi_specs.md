@@ -187,6 +187,9 @@ is done on a transaction-by-transaction basis:
 - The master and the selected slave transfer data bits.
 - The master de-asserts **CS**.
 
+> [!NOTE]  
+> In the verification we can select ...
+
 A transaction is shown in Figure **6**. The edges caused by asserting
 and de-asserting **CS** are used to activate certain actions, such as driving a
 bit or latching parallel data, in the slave device. This implies that **CS**
