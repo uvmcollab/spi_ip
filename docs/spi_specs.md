@@ -183,9 +183,17 @@ chip-select signal. A slave device is disabled if its **CS** is not asserted. In
 many devices, the **CS** also functions as a control signal. The data exchange
 is done on a transaction-by-transaction basis:
 
-- <span style="color:yellow">The master asserts **CS**.</span>
+- $\color{yellow}{\text{The master asserts \textbf{CS}.}}$
 - The master and the selected slave transfer data bits.
-- The master de-asserts **CS**.
+- The master de-asserts **CS**.[^1]
+
+> [!NOTE]  
+> In the verification we can select ...
+
+[^1]: My reference.
+
+> **Note**
+> This is a note
 
 A transaction is shown in Figure **6**. The edges caused by asserting
 and de-asserting **CS** are used to activate certain actions, such as driving a
