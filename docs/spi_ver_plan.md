@@ -1,6 +1,7 @@
 - [1. Verification Plan](#1-verification-plan)
   - [1.1 Verification Enviroment](#11-verification-enviroment)
   - [1.2 Class construction](#12-class-construction)
+  - [1.3 Transactions](#13-transactions)
 
 
 # 1. Verification Plan
@@ -9,3 +10,4 @@
 
 ## 1.2 Class construction
 
+## 1.3 Transactions
