@@ -2,6 +2,9 @@
 - [SPI Verification Functional Coverage Plan](#spi-verification-functional-coverage-plan)
   - [1.1. Objective](#11-objective)
   - [1.2. Design Under Verification (DUV)](#12-design-under-verification-duv)
+    - [1.2.2 Functional Description Summary:\*\*](#122-functional-description-summary)
+  - [UVM Testbench Architecture proposar.](#uvm-testbench-architecture-proposar)
+  - [](#)
   - [1.3. Coverage Goals](#13-coverage-goals)
   - [4. Coverage Structure](#4-coverage-structure)
   - [1.1. SPI Interface](#11-spi-interface)
@@ -39,7 +42,7 @@ Functional coverage complements assertion-based verification (SVA) and scoreboar
 - Status: `ready_o`, `spi_done_tick_o`
 - Clock output: `sclk_o`
 
-**Functional Description Summary:**
+### 1.2.2 Functional Description Summary:**
 - Implements SPI master transmission of 8-bit frames.
 - Supports configurable SPI modes via `cpol_i` and `cpha_i`.
 - Clock frequency is determined by `dvsr_i`.
@@ -47,7 +50,12 @@ Functional coverage complements assertion-based verification (SVA) and scoreboar
 - Serial data shift operations for `MOSI`/`MISO`.
 
 ---
+## UVM Testbench Architecture proposar.
 
+<p align="center">
+  <img src="images/01-spi-uvm-test-architecture.svg" width="60%"><br>
+  <em>Figure 1: SPI UVM Test Architecture</em>
+</p>
 ---
 
 ## 1.3. Coverage Goals
