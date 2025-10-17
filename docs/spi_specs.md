@@ -183,8 +183,8 @@ chip-select signal. A slave device is disabled if its **CS** is not asserted. In
 many devices, the **CS** also functions as a control signal. The data exchange
 is done on a transaction-by-transaction basis:
 
-- $\color{yellow}{\text{The master asserts \textbf{CS}.}}$
-- The master and the selected slave transfer data bits.
+- `The master asserts`
+- **The master and the selected slave transfer data bits.**
 - The master de-asserts **CS**.[^1]
 
 > [!NOTE]  
@@ -226,7 +226,7 @@ by software driver and application.
 
 ## 2.1 Module overview
 
-The `spi_ip` module implements a configurable Serial Peripheral Interface (SPI) master. 
+The `spi_i`p module implements a configurable Serial Peripheral Interface (SPI) master. 
 It supports selectable clock polarity (`cpol_i`) and clock phase (`cpha_i`) modes,
 programmable clock division (`dvsr_i`), and 8-bit data transfers. The core handles
 the SPI transaction flow: loading data to transmit, shifting out on `mosi_o`, 
