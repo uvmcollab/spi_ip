@@ -14,13 +14,11 @@ module tb;
   logic rst_i = 1;
   initial begin
     repeat (2) @(posedge clk_i);
-    rst_i = 1;
-    @(posedge clk_i);
     rst_i = 0;
   end
 
   // Interface
-  spi_uvc_if spi_vif (clk_i);
+  spi_uvc_if spi_vif (clk_i, rst_i);
 
   // DUT Instantiation
   spi_ip dut (

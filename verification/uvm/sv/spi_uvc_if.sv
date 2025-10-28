@@ -2,10 +2,11 @@
 `define SPI_UVC_IF_SV
 
 interface spi_uvc_if (
-    input logic clk_i
+    input logic clk_i,
+    input logic rst_i
 );
 
-  logic rst_i;
+  // Inputs
   logic [7:0] din_i;
   logic [15:0] dvsr_i;
   logic start_i;
@@ -13,6 +14,7 @@ interface spi_uvc_if (
   logic cpha_i;
   logic miso_i;
 
+  // Outputs 
   logic [7:0] dout_o;
   logic spi_done_tick_o;
   logic ready_o;
@@ -21,9 +23,8 @@ interface spi_uvc_if (
 
   // Initial values
   initial begin
-    rst_i   = 0;
     din_i   = 0;
-    dvsr_i  = 0;
+    dvsr_i  = 'd50;
     start_i = 0;
     cpol_i  = 0;
     cpha_i  = 0;
@@ -33,7 +34,6 @@ interface spi_uvc_if (
 
   clocking cb_drv @(posedge clk_i);
     default input #1ns output #1ns;
-    output rst_i;
     output din_i;
     output dvsr_i;
     output start_i;
@@ -41,6 +41,17 @@ interface spi_uvc_if (
     output cpha_i;
     output miso_i;
   endclocking : cb_drv
+
+
+  clocking cb_drv_neg @(negedge clk_i);
+    default input #1ns output #1ns;
+    output din_i;
+    output dvsr_i;
+    output start_i;
+    output cpol_i;
+    output cpha_i;
+    output miso_i;
+  endclocking : cb_drv_neg
 
 
   clocking cb_mon @(posedge clk_i);
