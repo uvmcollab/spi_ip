@@ -43,6 +43,16 @@ endtask : run_phase
 
 
 task spi_uvc_driver::do_drive();
+  if(req.m_cmd == SPI_UVC_WRITE)begin
+    @(vif.cb_drv);
+    vif.cb_drv.din_i <= req.m_data;
+    vif.cb_drv.start_i <= 1'b1;
+    @(vif.cb_drv);
+    vif.cb_drv.start_i <= 1'b0;
+    // Wait for the end of the transaction
+    wait (vif.spi_done_tick_o != 1);
+    @(vif.cb_drv iff (vif.spi_done_tick_o == 1));
+  end
   `uvm_info(get_type_name(), {"\n ------ DRIVER (spi UVC) ------", req.convert2string()}, UVM_DEBUG)
 endtask : do_drive
 
