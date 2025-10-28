@@ -6,20 +6,13 @@ class spi_uvc_sequence_item extends uvm_sequence_item;
   `uvm_object_utils(spi_uvc_sequence_item)
 
   // Transaction variables
-  rand logic rst_i;
-  rand logic [7:0] din_i;
-  rand logic [15:0] dvsr_i;
-  rand logic start_i;
-  rand logic cpol_i;
-  rand logic cpha_i;
-  rand logic miso_i;
+  rand byte m_data;
+  rand spi_uvc_cmd_e m_cmd;
 
   // Readout variables
-  logic [7:0] dout_o;
-  logic spi_done_tick_o;
-  logic ready_o;
-  logic sclk_o;
-  logic mosi_o;
+  byte m_data_out;
+  byte m_data_mosi;
+  byte m_data_miso;
 
   extern function new(string name = "");
 
@@ -42,6 +35,7 @@ function void spi_uvc_sequence_item::do_copy(uvm_object rhs);
   super.do_copy(rhs);
 endfunction : do_copy
 
+
 function bit spi_uvc_sequence_item::do_compare(uvm_object rhs, uvm_comparer comparer);
   bit result;
   spi_uvc_sequence_item rhs_;
@@ -61,7 +55,7 @@ function string spi_uvc_sequence_item::convert2string();
   string s;
   s = super.convert2string();
   $sformat(s, {s, "\n", "TRANSACTION INFORMATION (spi UVC):"});
-  $sformat(s, {s, "\n", "SEQUENCE ITEM"});
+  $sformat(s, {s, "\n", "m_data = %4d"},m_data);
   return s;
 endfunction : convert2string
 
