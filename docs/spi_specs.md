@@ -265,3 +265,5 @@ and `ready_o` returns high, allowing new transactions to start.
 ## 3.0 References
 
 - [spi-Wikipedia](https://en.wikipedia.org/wiki/Serial_Peripheral_Interface) 
+- [Texas Intruments](hhttps://www.ti.com/lit/ug/sprugp2a/sprugp2a.pdf?ts=1762812299021&ref_url=https%253A%252F%252Fwww.google.com%252F) 
+- [ST-Wiki](https://wiki.st.com/stm32mcu/wiki/Getting_started_with_SPI) 
